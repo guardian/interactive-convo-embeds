@@ -47,6 +47,9 @@ html, body {
 	&:first-child {
 		margin-left: 0;
 		transition: margin-left 0.75s ease-out;
+		.embed--fast-transition & {
+			transition: margin-left 0.2s ease-out;
+		}
 	}
 }
 
@@ -111,6 +114,14 @@ button {
 	margin-left: 10px;
 	.embed[meta="first"] & {
 		opacity: 0.2;
+		cursor: default;
+	}
+}
+
+.next {
+	.embed[meta="last"] & {
+		opacity: 0.2;
+		cursor: default;
 	}
 }
 

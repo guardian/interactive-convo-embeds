@@ -29,10 +29,16 @@ export function init(el, context) {
 			currentIndex = index;
 			firstTitleEl.style.marginLeft = `${currentIndex * -100}%`;
 			embedEl.setAttribute('meta', currentIndex === 0 ? 'first' : currentIndex === contents.length-1 ? 'last' : '');
+			embedEl.href = contents[currentIndex].url;
 		}
 
 		var goToNext = () => {
 			var nextIndex = currentIndex === contents.length-1 ? 0 : currentIndex + 1;
+			goToIndex(nextIndex);
+		};
+
+		var goToPrev = () => {
+			var nextIndex = currentIndex === 0 ? contents.length-1 : currentIndex - 1;
 			goToIndex(nextIndex);
 		};
 
@@ -44,6 +50,31 @@ export function init(el, context) {
 		embedEl.addEventListener('mouseleave', evt => {
 			bonzo(embedEl).removeClass('embed--hover');
 			startCarousel();
+		})
+
+		var $embedEl = bonzo(embedEl),
+			prevEl = embedEl.querySelector('.prev'),
+			nextEl = embedEl.querySelector('.next');
+
+		prevEl.addEventListener('mouseenter', evt => $embedEl.addClass('embed--fast-transition'))
+		prevEl.addEventListener('mouseleave', evt => $embedEl.removeClass('embed--fast-transition'))
+		nextEl.addEventListener('mouseenter', evt => $embedEl.addClass('embed--fast-transition'))
+		nextEl.addEventListener('mouseleave', evt => $embedEl.removeClass('embed--fast-transition'))
+
+		prevEl.addEventListener('click', evt => {
+			evt.preventDefault();
+			if (currentIndex !== 0) {
+				goToPrev();
+				bonzo(embedEl).addClass('embed--fast-transition')
+			}
+		})
+
+
+		nextEl.addEventListener('click', evt => {
+			evt.preventDefault();
+			if (currentIndex !== contents.length-1) {
+				goToNext();
+			}
 		})
 
 		var interval,
