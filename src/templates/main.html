@@ -1,0 +1,21 @@
+<a class="embed" href="{{=it.url}}">
+	<h2 class="header">The conversations issue</h2>
+
+	<h1 class="kicker">Read the conversation that</h1>
+
+	<div class="titles">
+	{{~ it.contents :content:i}}
+		<h1 class="title">{{=content.title}}</h1>
+	{{~}}
+	</div>
+
+
+	<button class="readit">Read it</button>
+    <button class="prev">
+        <svg width="24" height="23" viewBox="0 0 24 23"><path d="M0 11.5l10.296 10.1.96-.96L3.2 12H23v-2H3.2L11.255.96l-.96-.96L0 10.5v1" fill="black"/></svg>
+    </button>
+    <button class="next">
+        <svg width="24" height="23" viewBox="0 0 24 23"><path d="M23 11.5L12.704 21.6l-.96-.96L19.8 12H0v-2h19.8L11.745.96l.96-.96L23 10.5v1" fill="black"/></svg>
+    </button>
+
+</div>
