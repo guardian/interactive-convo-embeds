@@ -4,23 +4,19 @@ import bean from 'fat/bean'
 import bowser from 'ded/bowser'
 import bonzo from 'ded/bonzo'
 import reqwest from 'reqwest'
+import {fetchJSON} from './lib/fetch'
 
 var renderMainTemplate = doT.template(mainTemplate);
+let jsonURL = 'https://interactive.guim.co.uk/docsdata/1O84T2QVZ5CUWELQ4_ZfdfctxuTTP2JE0xropElb7DAo.json'
 
-export function init(el, context) {
-	var protocol = (bowser.msie && bowser.version < 10 ? '//' : 'https://');
-	reqwest({
-        url: `${protocol}interactive.guim.co.uk/docsdata/1O84T2QVZ5CUWELQ4_ZfdfctxuTTP2JE0xropElb7DAo.json`,
-        type: 'json', contentType: 'application/json', crossOrigin: true
-    }).then(spreadsheet => {
+export function that(el, context) {
+	fetchJSON(jsonURL).then(spreadsheet => {
     	var contents = spreadsheet.sheets.interactive;
 		el.innerHTML = renderMainTemplate({
 			contents: contents
 		})
 
 		var embedEl = el.querySelector('.embed');
-
-		embedEl.setAttribute('meta', 'first')
 
 		var firstTitleEl = el.querySelector('.title');
 		var currentIndex = 0;
@@ -82,5 +78,6 @@ export function init(el, context) {
 			stopCarousel = () => window.clearInterval(interval);
 
 		startCarousel();
+		goToIndex(0);
     })
 }
