@@ -1,0 +1,20 @@
+<!doctype html>
+<html>
+    <head>
+        <meta http-equiv="X-UA-Compatible" content="IE=Edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" type="text/css" href="build/main.css">
+        <script src="jspm_packages/system.js"></script>
+        <script src="src/js/config.js"></script>
+        <script src="build/main.js"></script>
+        <title></title>
+    </head>
+    <body>
+        <div id="container"></div>
+        <script type="text/javascript">
+            System.import('src/js/main').then(function(main) {
+              main.between(document.getElementById('container'));
+            })
+        </script>
+    <body>
+</html>
