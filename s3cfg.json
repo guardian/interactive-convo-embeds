@@ -1,0 +1,7 @@
+{
+	"credentialsFile": "$HOME/.aws/credentials",
+	"profile": "visuals",
+	"bucket": "gdn-cdn",
+	"path": "embed/2015/11/conversations",
+	"domain": "https://interactive.guim.co.uk/"
+}

@@ -1,8 +1,29 @@
 var fs = require('fs')
+var ini = require('ini')
+var path = require('path')
+
+function getAWSCredentials(grunt, cfg) {
+    var awsCredentialsFilePath = cfg.credentialsFile.replace('$HOME', process.env['HOME']);
+    if (!fs.existsSync(awsCredentialsFilePath)) {
+        grunt.log.warn('Credentials file missing: ' + awsCredentialsFilePath);
+        return
+    }
+    var iniFile = ini.parse(fs.readFileSync(awsCredentialsFilePath, 'utf-8'));
+    if (iniFile[cfg.profile]) {
+        grunt.log.ok('Using AWS credentials ' + cfg.profile + ' profile');
+        return iniFile[cfg.profile];
+    }
+
+    grunt.log.warn('AWS Credentials profile ' + cfg.profile + ' does not exist. Using default credentials.')
+    return iniFile.default;
+}
 
 module.exports = function(grunt) {
 
     require('jit-grunt')(grunt);
+
+    var s3 = require('./s3cfg.json');
+    var awsCredentials = getAWSCredentials(grunt, s3);
 
     grunt.initConfig({
 
@@ -50,19 +71,6 @@ module.exports = function(grunt) {
                 bucket: 'gdn-cdn',
                 differential: true
             },
-            data: {
-                files: [
-                    {
-                        expand: true,
-                        cwd: '.',
-                        src: [
-                            'data/bills/*', 'data/divisions/*', 'data/membersfordivisions.json'
-                        ],
-                        dest: 'embed/parliament/',
-                        params: { CacheControl: 'max-age=60' }
-                    }
-                ]
-            },
             production: {
                 files: [
                     {
@@ -72,9 +80,9 @@ module.exports = function(grunt) {
                             // shared
                             'jspm_packages/system.js', 'src/js/config.js',
                             // state
-                            'build/main.css', 'build/main.js', 'build/main.js.map', 'index.html',
+                            'build/main.css', 'build/main.js', 'build/main.js.map', 'that.html', 'between.html'
                         ],
-                        dest: 'embed/conversations/',
+                        dest: s3.path,
                         params: { CacheControl: 'max-age=60' }
                     }
                 ]
