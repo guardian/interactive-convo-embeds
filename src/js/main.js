@@ -6,6 +6,7 @@ import bowser from 'ded/bowser'
 import bonzo from 'ded/bonzo'
 import reqwest from 'reqwest'
 import {fetchJSON} from './lib/fetch'
+import iframeMessenger from 'guardian/iframe-messenger';
 
 let jsonURL = 'https://interactive.guim.co.uk/docsdata-test/1O84T2QVZ5CUWELQ4_ZfdfctxuTTP2JE0xropElb7DAo.json'
 
@@ -87,5 +88,6 @@ export function init(el, context, contentKey, templateFn) {
 
         startCarousel();
         goToIndex(0);
+        iframeMessenger.enableAutoResize();
     })
 }
