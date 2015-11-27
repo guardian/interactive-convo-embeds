@@ -48,7 +48,6 @@ $col2: #535353;
 }
 
 .kicker {
-    margin-top: 12px;
     color: $col1;
 }
 
@@ -168,6 +167,41 @@ button {
         }
         .title span {
             display: block;
+        }
+    }
+}
+
+.embed--that {
+    .kicker, .title {
+        font-size: 22px;
+        line-height: 28px;
+    }
+}
+
+@media (min-width: 320px) {
+    .embed--that {
+        .kicker, .title {
+            font-size: 24px;
+            line-height: 30px;
+        }
+    }
+}
+
+
+@media (min-width: 340px) {
+    .embed--that {
+        .kicker, .title {
+            font-size: 26px;
+            line-height: 32px;
+        }
+    }
+}
+
+@media (min-width: 400px) {
+    .embed--that {
+        .kicker, .title {
+            font-size: 36px;
+            line-height: 42px;
         }
     }
 }
