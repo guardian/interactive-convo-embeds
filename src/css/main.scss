@@ -25,9 +25,7 @@ $col2: #535353;
 	}
 }
 
-.header {
-	display: none;
-}
+
 .title, .kicker {
 	@include f-header;
 	margin: 0;
@@ -129,9 +127,6 @@ button {
 }
 
 @media (min-width: 620px) {
-	.header {
-		display: block;
-	}
 	.title, .kicker {
 		font-size: 44px;
 		line-height: 50px;
@@ -164,14 +159,8 @@ button {
 }
 
 @media (min-width: 380px) {
-	.title__and:before {
+	.title__and:after {
 		content: '';
 		display: block;
-	}
-}
-
-@media (max-width: 620px) {
-	.header {
-		display: none;
 	}
 }
