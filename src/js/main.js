@@ -21,6 +21,10 @@ export function that(el, context) {
 export function init(el, context, contentKey, templateFn) {
     fetchJSON(jsonURL).then(spreadsheet => {
         var contents = spreadsheet.sheets[contentKey];
+
+        let match = /[?&]on=(\w+)/.exec(document.location.search);
+        if (match) contents = contents.filter(c => c.url.slice(-5) !== match[1]);
+
         el.innerHTML = templateFn({
             contents: contents,
             meta: spreadsheet.sheets.meta[0]
