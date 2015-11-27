@@ -1,13 +1,11 @@
 <a class="embed embed--between">
 	<h2 class="header">{{=it.meta.header}}</h2>
 
-	<h1 class="kicker">Read a conversation</h1>
-
 	<div class="titles">
 	{{~ it.contents :content:i}}
-		<h1 class="title"><span>between </span>
+		<h1 class="title">
 			<span class="title__author" style="color: {{=content.color}}">{{=content['1']}}</span>
-			<span class="title__and">and </span>
+			<span class="title__and"> meets </span>
 			<span class="title__author" style="color: {{=content.color}}">{{=content['2']}}</span>
 		</h1>
 	{{~}}
