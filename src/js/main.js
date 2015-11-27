@@ -22,7 +22,8 @@ export function init(el, context, contentKey, templateFn) {
     fetchJSON(jsonURL).then(spreadsheet => {
         var contents = spreadsheet.sheets[contentKey];
         el.innerHTML = templateFn({
-            contents: contents
+            contents: contents,
+            meta: spreadsheet.sheets.meta[0]
         })
 
         var embedEl = el.querySelector('.embed');
