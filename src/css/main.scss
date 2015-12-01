@@ -91,9 +91,6 @@ button {
     line-height: 32px;
     cursor: pointer;
     width: 80px;
-    // .embed:hover & {
-    //  background-color: #bdbdbd;
-    // }
 }
 
 .prev, .next {
@@ -119,8 +116,10 @@ button {
         width: 60%;
         height: 60%;
     }
-    &:hover {
-        border-color: black;
+    @include mq(tablet) {
+        &:hover {
+            border-color: black;
+        }
     }
 }
 
